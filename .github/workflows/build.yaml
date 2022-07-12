@@ -1,4 +1,4 @@
-name: Build and push the latest build
+name: Push the latest build
 
 on:
   push:
@@ -10,7 +10,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-20.04
-    needs: build_push_image
 
     steps:
       - uses: actions/checkout@v2
