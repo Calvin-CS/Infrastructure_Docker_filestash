@@ -17,7 +17,7 @@ metadata:
   name: filestash
   namespace: production
   annotations: 
-    "builddate": "20220712-1"
+    "builddate": "20220712-3"
 spec:
   replicas: 1
   selector:
