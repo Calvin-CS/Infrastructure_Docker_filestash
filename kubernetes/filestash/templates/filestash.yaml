@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: filestash-azure-managed-disk
+  namespace: production
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: managed-csi
+  resources:
+    requests:
+      storage: 4Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filestash
+  namespace: production
+  annotations: 
+    "builddate": "20220712-1"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: filestash
+  template:
+    metadata:
+      labels:
+        app: filestash
+    spec:
+      # Allow non-root user to access PersistentVolume
+      securityContext:
+        fsGroup: 1000
+      containers:
+      - name: filestash
+        image: {{ .Values.image.registry }}/{{ .Values.image.name }}:{{ default "latest" .Values.image.tag }}
+        ports:
+        - containerPort: 8334
+        volumeMounts:
+        - mountPath: "/app/data/state"
+          name: volume
+      volumes:
+      - name: volume
+        persistentVolumeClaim:
+          claimName: filestash-azure-managed-disk
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: filestash
+  namespace: production
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8334
+  selector:
+    app: filestash

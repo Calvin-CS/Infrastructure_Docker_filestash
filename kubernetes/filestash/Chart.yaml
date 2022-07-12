@@ -1,0 +1,4 @@
+apiVersion: v2
+name: filestash
+description: A Helm chart for Kubernetes deployment of filestash
+version: 0.1.0
