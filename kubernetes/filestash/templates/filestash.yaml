@@ -16,8 +16,6 @@ kind: Deployment
 metadata:
   name: filestash
   namespace: production
-  annotations: 
-    "builddate": "20220712-3"
 spec:
   replicas: 1
   selector:
@@ -25,6 +23,8 @@ spec:
       app: filestash
   template:
     metadata:
+      annotations:
+        releaseTime: {{ dateInZone "2006-01-02 15:04:05Z" (now) "UTC"| quote }}
       labels:
         app: filestash
     spec:
