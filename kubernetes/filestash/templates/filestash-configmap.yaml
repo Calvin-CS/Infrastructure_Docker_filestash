@@ -1,0 +1,9 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: filestash-{{ default "staging" .Release.Namespace }}-config
+  labels:
+    tier: backend
+data:
+  config: |
+    {"general":{"name":"Calvin CS Filestash","port":null,"host":"filestash.cs.calvin.edu","secret_key":"ToXj8bTYJLoqZgXW","force_ssl":null,"editor":null,"fork_button":null,"logout":null,"display_hidden":false,"refresh_after_upload":true,"upload_button":null,"upload_pool_size":null,"filepage_default_view":"list","filepage_default_sort":"name","cookie_timeout":null,"custom_css":null},"features":{"api":{"enable":false,"api_key":null},"share":{"enable":false,"default_access":null,"redirect":null},"protection":{"iframe":null,"enable_chromecast":false,"zip_timeout":null,"enable":false,"disable_svg":null},"office":{"enable":null,"onlyoffice_server":null,"can_download":null},"server":{"console_enable":null},"search":{"explore_timeout":null},"video":{"blacklist_format":null,"enable_transcoder":false}},"log":{"enable":null,"level":null,"telemetry":null},"email":{"server":"mailhost.calvin.edu","port":"25","username":null,"password":null,"from":"cpsc-admin@cs.calvin.edu"},"auth":{"admin":"$2a$10$/5zerRn9sKBLOq5cEH7MsOZwddQNiO.MelxtrVVMjclamc4KYr7V2"},"middleware":{"attribute_mapping":{"related_backend":"","params":"WBX_LRxwM42aDIvQBXJDYS1tTcZvkPNpjDJqTQHrm7f5J9dHxI2QeM0W"},"identity_provider":{"type":null,"params":"WBX_LRxwM42aDIvPcOFYXeke59ChlsC2ay_XiNQBktKWxWefDn08UWOvlKfoTKRv9JzhzXAqiTMdyfCrq5r24sOrm5dzE9JpEHszhvFjxtswBBwQRSEnyQ=="}},"connections":[{"label":"Linux","type":"sftp","hostname":"cs-ssh.cs.calvin.edu"},{"label":"Windows","type":"sftp","hostname":"csad-admin1.csad.cs.calvin.edu"}]}
