@@ -15,6 +15,8 @@ spec:
       labels:
         app: filestash
     spec:
+      nodeSelector:
+        CSInfrastructure: "true"
       # Allow non-root user to access PersistentVolume
       securityContext:
         fsGroup: 1000
